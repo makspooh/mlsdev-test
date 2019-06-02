@@ -1,5 +1,6 @@
 <template>
     <v-container grid-list-xl>
+    <app-header></app-header>
         <v-layout wrap style="justify-content: center">
             <v-flex
                 v-for="(user, index) in users"
@@ -31,7 +32,7 @@
                             :to="'/user/' + user.login"
                             style="text-decoration: none"
                         >
-                            <v-btn flat color="purple">More info</v-btn>
+                            <v-btn color="warning" depressed="">More info</v-btn>
                         </router-link>
                         <v-spacer></v-spacer>
                     </v-card-actions>
@@ -42,29 +43,20 @@
 </template>
 
 <script>
+import AppHeader from '../components/AppHeader'
+import {mapState} from 'vuex';
+
 export default {
-    data() {
-        return {
-            
-        }
+    mounted() {
+      this.$store.dispatch('loadUsers');
+    },
+    components: {
+        AppHeader
     },
     computed: {
-        users() {
-            return this.$store.state.users;
-        }
-    },
-    created() {
-        fetch('https://tanuhaua.github.io/datas-file-json/github_users.json')
-            .then(response => response.json())
-            .then(data => {
-                data.forEach(user => {
-                    fetch(`https://api.github.com/users/${user.githubName}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            this.users.push(data);
-                        })
-                });
-            })
+        ...mapState([
+            'users'
+        ])
     }
 }
 </script>

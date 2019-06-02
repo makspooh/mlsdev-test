@@ -1,9 +1,24 @@
 <template>
 <v-container>
+  <v-card
+    flat class="mb-5"
+    v-if="user.name"
+  >
+      <v-layout row child-flex wrap>
+        <div>
+          <v-toolbar>
+            <v-toolbar-title>{{ user.name }}</v-toolbar-title>
+          </v-toolbar>
+        </div>
+      </v-layout>
+  </v-card>
   <v-layout style="justify-content: center">
-    <v-flex xs10 sm6>
-      <v-card>
-        <v-img :src="this.user.avatar_url" height="400px">
+    <v-flex xs6 sxm6>
+      <v-card row>
+        <v-img
+          :src="this.user.avatar_url"
+          height="500px"
+        >
           <v-layout column fill-height>
 
             <v-spacer></v-spacer>
@@ -47,7 +62,12 @@
               <v-icon color="indigo">settings_ethernet</v-icon>
             </v-list-tile-action>
             
-            <v-select label="Repositories"></v-select>
+            <router-link
+              :to="'/user/' + githubName + '/repos'"
+              style="text-decoration: none"
+            >
+              <v-btn color="warning" depressed="">Show repositories</v-btn>
+            </router-link>
           </v-list-tile>
         </v-list>
       </v-card>
@@ -60,12 +80,12 @@
 export default {
     data() {
         return {
-            user: [],
-            login: this.$router.currentRoute.params['id']
+            user: {},
+            githubName: this.$router.currentRoute.params['id']
         }
     },
     created() {
-      fetch(`https://api.github.com/users/${this.login}`)
+      fetch(`https://api.github.com/users/${this.githubName}`)
         .then(response => response.json())
         .then(data => {
           this.user = data;
