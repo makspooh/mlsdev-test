@@ -1,15 +1,22 @@
 <template>
     <v-container>
-    <v-card flat class="mb-5">
-            <v-layout row child-flex wrap>
+        <v-card
+            flat
+            class="mb-5"
+        >
+            <v-layout
+                row
+                child-flex
+            >
                 <div>
-                <v-toolbar>
-                    <v-toolbar-title>Commits of {{ repoName }}</v-toolbar-title>
-                </v-toolbar>
+                    <v-toolbar>
+                        <v-toolbar-title>Commits of {{ repoName }}</v-toolbar-title>
+                    </v-toolbar>
                 </div>
             </v-layout>
         </v-card>
         <v-data-table
+            v-if="this.commits.length > 0"
             :items="commits"
             class="elevation-1"
             hide-actions
@@ -17,9 +24,13 @@
         >
             <template v-slot:items="props">
                 <td>{{ props.item.commit.message }}</td>
+                <v-spacer></v-spacer>
                 <td>{{ getDate(props.item.commit.author.date) }}</td>
             </template>
         </v-data-table>
+        <v-card v-else>
+            <v-card-title>Repository is empty</v-card-title>
+        </v-card>
     </v-container>
 </template>
 
@@ -29,8 +40,7 @@ export default {
         return {
             repoName: this.$router.currentRoute.params['repo'],
             userName: this.$router.currentRoute.params['id'],
-            commits: [],
-            date: []
+            commits: []
         }
     },
     methods: {

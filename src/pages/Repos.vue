@@ -1,14 +1,21 @@
 <template>
-<v-container>
-    <v-card flat class="mb-5">
-        <v-layout row child-flex wrap>
-            <div>
-            <v-toolbar>
-                <v-toolbar-title>Repositories of {{ user.name }}</v-toolbar-title>
-            </v-toolbar>
-            </div>
-        </v-layout>
-    </v-card>
+    <v-container>
+        <v-card
+            flat
+            class="mb-5"
+        >
+            <v-layout
+                row
+                child-flex
+                wrap
+            >
+                <div>
+                    <v-toolbar>
+                        <v-toolbar-title>Repositories of {{ user.name }}</v-toolbar-title>
+                    </v-toolbar>
+                </div>
+            </v-layout>
+        </v-card>
         <v-layout
             column
             wrap
@@ -36,37 +43,35 @@
                 </v-card>
             </v-flex>
         </v-layout>
-</v-container>
+    </v-container>
 </template>
 
 <script>
-export default {
-    /* eslint-disable */
-    data() {
-        return {
-            user: {},
-            repos: [],
-            reposUrl: [],
-            githubName: this.$router.currentRoute.params['id']
-        }
-    },
-    methods: {
-        getRepos() {
-            fetch(`https://api.github.com/users/${this.githubName}`)
-                .then(response => response.json())
-                .then(data => {
-                this.user = data;
-
-                fetch(this.user.repos_url)
+    export default {
+        data() {
+            return {
+                user: [],
+                repos: [],
+                githubName: this.$router.currentRoute.params['id']
+            }
+        },
+        methods: {
+            getRepos() {
+                fetch(`https://api.github.com/users/${this.githubName}`)
                     .then(response => response.json())
                     .then(data => {
-                        this.repos = data;
+                        this.user = data;
+
+                        fetch(this.user.repos_url)
+                            .then(response => response.json())
+                            .then(data => {
+                                this.repos = data;
+                            })
                     })
-                })
+            }
+        },
+        created() {
+            this.getRepos();
         }
-    },
-    created() {
-        this.getRepos();
     }
-}
 </script>
