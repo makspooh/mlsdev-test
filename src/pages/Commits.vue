@@ -10,6 +10,12 @@
             >
                 <div>
                     <v-toolbar>
+                        <v-btn
+                            @click="this.goBack"
+                            icon class="hidden-xs-only"
+                        >
+                            <v-icon>arrow_back</v-icon>
+                        </v-btn>
                         <v-toolbar-title>Commits of {{ repoName }}</v-toolbar-title>
                     </v-toolbar>
                 </div>
@@ -59,6 +65,9 @@ export default {
             }
 
             return day + '.' + month + '.' + year;
+        },
+        goBack() {
+            this.$router.go(-1);
         }
     },
     created() {

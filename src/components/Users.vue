@@ -31,6 +31,7 @@
                     </v-card-title>
 
                     <v-card-actions>
+
                         <router-link
                             :to="'/user/' + user.login"
                             style="text-decoration: none"

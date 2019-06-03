@@ -11,6 +11,12 @@
             >
                 <div>
                     <v-toolbar>
+                        <v-btn
+                            @click="this.goBack"
+                            icon class="hidden-xs-only"
+                        >
+                            <v-icon>arrow_back</v-icon>
+                        </v-btn>
                         <v-toolbar-title>Repositories of {{ user.name }}</v-toolbar-title>
                     </v-toolbar>
                 </div>
@@ -68,6 +74,9 @@
                                 this.repos = data;
                             })
                     })
+            },
+            goBack() {
+                this.$router.go(-1);
             }
         },
         created() {

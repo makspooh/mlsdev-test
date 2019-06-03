@@ -11,6 +11,11 @@
       >
         <div>
           <v-toolbar>
+            <v-btn
+              @click="this.goBack"
+              icon class="hidden-xs-only">
+              <v-icon>arrow_back</v-icon>
+            </v-btn>
             <v-toolbar-title>{{ user.name }}</v-toolbar-title>
           </v-toolbar>
         </div>
@@ -90,6 +95,11 @@
               user: [],
               githubName: this.$router.currentRoute.params['id']
           }
+      },
+      methods: {
+        goBack() {
+            this.$router.go(-1);
+        }
       },
       created() {
         fetch(`https://api.github.com/users/${this.githubName}`)
