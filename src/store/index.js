@@ -5,20 +5,20 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        users: []
+        users: [],
+        ghNames: [
+            'paulmillr',
+            'mourner',
+            'DavertMik',
+            'dmytrodanylyk',
+            'DmitrySikorsky',
+            'bogdan'
+        ]
     },
     actions: {
         loadUsers({commit}) {
             let users = [];
-            let ghNames = [
-                'paulmillr',
-                'mourner',
-                'DavertMik',
-                'dmytrodanylyk',
-                'DmitrySikorsky',
-                'bogdan'
-            ];
-            ghNames.forEach(name => {
+            this.state.ghNames.forEach(name => {
                 fetch(`https://api.github.com/users/${name}`)
                     .then(response => response.json())
                     .then(data => {
