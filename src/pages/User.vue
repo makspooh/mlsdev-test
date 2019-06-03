@@ -1,7 +1,8 @@
 <template>
   <v-container>
     <v-card
-      flat class="mb-5"
+      flat
+      class="mb-5"
     >
       <v-layout
         row
@@ -22,7 +23,7 @@
       </v-layout>
     </v-card>
     <v-layout style="justify-content: center">
-      <v-flex xs6>
+      <v-flex xs11 md6>
         <v-card row>
           <v-img
             :src="this.user.avatar_url"
