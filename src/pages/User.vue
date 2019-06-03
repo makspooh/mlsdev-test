@@ -2,7 +2,6 @@
   <v-container>
     <v-card
       flat class="mb-5"
-      v-if="user.name"
     >
       <v-layout
         row
@@ -16,7 +15,8 @@
               icon class="hidden-xs-only">
               <v-icon>arrow_back</v-icon>
             </v-btn>
-            <v-toolbar-title>{{ user.name }}</v-toolbar-title>
+            <v-toolbar-title v-if="user.name">{{ user.name }}</v-toolbar-title>
+            <v-toolbar-title v-else>{{ user.login }}</v-toolbar-title>
           </v-toolbar>
         </div>
       </v-layout>
