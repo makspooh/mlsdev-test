@@ -12,7 +12,9 @@ export default new Vuex.Store({
             'DavertMik',
             'dmytrodanylyk',
             'DmitrySikorsky',
-            'bogdan'
+            'bogdan',
+            'nazar-pc',
+            'dimsemenov'
         ]
     },
     actions: {

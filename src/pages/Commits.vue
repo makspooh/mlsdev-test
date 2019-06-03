@@ -75,6 +75,7 @@ export default {
             .then(response => response.json())
             .then(data => {
                 this.commits = data;
+                console.log(this.commits)
             })
     }
 }

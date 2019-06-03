@@ -33,9 +33,9 @@
                 class="mb-3"
                 style="flex: 0 0 auto">
                 <v-card>
-                    <v-card-title primary-title>
+                    <v-card-title>
                         <div style="text-align: left">
-                            <div class="headline">{{ repo.name }}</div>
+                            <div>{{ repo.name }}</div>
                             <span class="grey--text">Repo name</span>
                         </div>
                         <v-spacer></v-spacer>
